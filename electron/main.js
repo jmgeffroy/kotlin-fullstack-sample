@@ -7,11 +7,24 @@ const url = require('url')
 let win
 
 function createWindow () {
+// Start the backend server
+ const process = require('child_process');   // The power of Node.JS
+
+    // var ls = process.spawn('ls', ['-l']);
+    var ls = process.spawn('startServers.sh');
+    ls.stderr.on('data', function (data) {
+      console.log('stderr: ' + data);
+    });
+
   // Create the browser window.
   win = new BrowserWindow({width: 800, height: 600})
 
   // and load the index.html of the app.
-  win.loadURL("http://localhost:8080")
+    setTimeout(function () {
+	win.loadURL("http://localhost:8080")
+    }, 5000);
+
+//  win.loadURL("http://localhost:8080")
 //url.format({
 //    pathname: path.join(__dirname, 'index.html'),
 //    protocol: 'file:',
